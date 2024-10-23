@@ -1,0 +1,2582 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>EDA Default Probability Prediction &#8212; Parcial práctico 2 Machine Learning.</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'EDA_regre';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Punto 2" href="punto2.html" />
+    <link rel="prev" title="EDA Wind Speed" href="EDA_clasifi.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/uninortelogo.jpeg" class="logo__image only-light" alt="Parcial práctico 2 Machine Learning. - Home"/>
+    <script>document.write(`<img src="_static/uninortelogo.jpeg" class="logo__image only-dark" alt="Parcial práctico 2 Machine Learning. - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Entrega parcial práctico #2
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="EDA_clasifi.html"><strong>EDA Wind Speed</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>EDA Default Probability Prediction</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="punto2.html"><strong>Punto 2</strong></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="punto3.html"><strong>Ejercicio 3</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FEDA_regre.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/EDA_regre.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>EDA Default Probability Prediction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos"><strong>Análisis Exploratorio de Datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-faltantes"><strong>Datos faltantes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlacion-y-multicolinealidad"><strong>Correlación y multicolinealidad</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#codificacion-de-las-variables-categorias"><strong>codificación de las variables categórias.</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vif"><strong>Vif</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas"><strong>Gráficas</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="eda-default-probability-prediction">
+<h1><strong>EDA Default Probability Prediction</strong><a class="headerlink" href="#eda-default-probability-prediction" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">pypalettes</span> <span class="kn">import</span> <span class="n">load_cmap</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">squarify</span>
+<span class="kn">import</span> <span class="nn">statsmodels</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.experimental</span> <span class="kn">import</span> <span class="n">enable_iterative_imputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">IterativeImputer</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">skew</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esta base de datos contiene perfiles anonimizados y caracteristicas que se han recopilado de la cuenta de cada cliente. Con el fin, de mejorar la predicción de impago de crédito.</p>
+<p>Contamos con dos dataset para entrenamiento, uno llamado trainlabels que contiene todas las etiquetas anomimas de cada cliente, y testdata que contiene los datos de prueba que utilizaremos para predecir la etiqueta objetivo de cada cliente.</p>
+<section id="analisis-exploratorio-de-datos">
+<h2><strong>Análisis Exploratorio de Datos</strong><a class="headerlink" href="#analisis-exploratorio-de-datos" title="Link to this heading">#</a></h2>
+<p>Para este problema, contamos dos bases de datos para el entrenamiento, en donde <strong>trainlabels</strong> contiene todas las etiquetas objetivo para cada <code class="docutils literal notranslate"><span class="pre">customer_ID</span></code> y <strong>traindata</strong> contiene todos los datos de entrenamiento con multiples fechas de estado de cuenta por <code class="docutils literal notranslate"><span class="pre">customer_ID</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainlabels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C:\Users\Usuario\Downloads\train_labels.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainlabels</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 458913 entries, 0 to 458912
+Data columns (total 2 columns):
+ #   Column       Non-Null Count   Dtype 
+---  ------       --------------   ----- 
+ 0   customer_ID  458913 non-null  object
+ 1   target       458913 non-null  int64 
+dtypes: int64(1), object(1)
+memory usage: 7.0+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos observar que este dataset contiene dos variables y esta son <code class="docutils literal notranslate"><span class="pre">customer_ID</span></code> que es una variable categorica y otra variable llamada <code class="docutils literal notranslate"><span class="pre">target</span></code> que es una variable númerica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainlabels</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_ID</th>
+      <th>target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>00000fd6641609c6ece5454664794f0340ad84dddce9a2...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>00001b22f846c82c51f6e3958ccd81970162bae8b007e8...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>000041bdba6ecadd89a52d11886e8eaaec9325906c9723...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>00007889e4fcd2614b6cbe7f8f3d2e5c728eca32d9eb8a...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>000084e5023181993c2e1b665ac88dbb1ce9ef621ec537...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>000098081fde4fd64bc4d503a5d6f86a0aedc425c96f52...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0000d17a1447b25a01e42e1ac56b091bb7cbb06317be4c...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0000f99513770170a1aba690daeeb8a96da4a39f11fc27...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>00013181a0c5fc8f1ea38cd2b90fe8ad2fa8cad9d9f13e...</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Ahora cargaremos la base de datos que contiene los datos de entrenamiento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traindata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C:\Users\Usuario\Downloads\train_data.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traindata</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5531451, 190)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos observar que esta base contiene un número de <strong>5.531,451</strong> filas y <strong>190</strong> columnas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traindata</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_ID</th>
+      <th>S_2</th>
+      <th>P_2</th>
+      <th>D_39</th>
+      <th>B_1</th>
+      <th>B_2</th>
+      <th>R_1</th>
+      <th>S_3</th>
+      <th>D_41</th>
+      <th>B_3</th>
+      <th>...</th>
+      <th>D_136</th>
+      <th>D_137</th>
+      <th>D_138</th>
+      <th>D_139</th>
+      <th>D_140</th>
+      <th>D_141</th>
+      <th>D_142</th>
+      <th>D_143</th>
+      <th>D_144</th>
+      <th>D_145</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-03-09</td>
+      <td>0.938469</td>
+      <td>0.001733</td>
+      <td>0.008724</td>
+      <td>1.006838</td>
+      <td>0.009228</td>
+      <td>0.124035</td>
+      <td>0.008771</td>
+      <td>0.004709</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.002427</td>
+      <td>0.003706</td>
+      <td>0.003818</td>
+      <td>NaN</td>
+      <td>0.000569</td>
+      <td>0.000610</td>
+      <td>0.002674</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-04-07</td>
+      <td>0.936665</td>
+      <td>0.005775</td>
+      <td>0.004923</td>
+      <td>1.000653</td>
+      <td>0.006151</td>
+      <td>0.126750</td>
+      <td>0.000798</td>
+      <td>0.002714</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.003954</td>
+      <td>0.003167</td>
+      <td>0.005032</td>
+      <td>NaN</td>
+      <td>0.009576</td>
+      <td>0.005492</td>
+      <td>0.009217</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-05-28</td>
+      <td>0.954180</td>
+      <td>0.091505</td>
+      <td>0.021655</td>
+      <td>1.009672</td>
+      <td>0.006815</td>
+      <td>0.123977</td>
+      <td>0.007598</td>
+      <td>0.009423</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.003269</td>
+      <td>0.007329</td>
+      <td>0.000427</td>
+      <td>NaN</td>
+      <td>0.003429</td>
+      <td>0.006986</td>
+      <td>0.002603</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-06-13</td>
+      <td>0.960384</td>
+      <td>0.002455</td>
+      <td>0.013683</td>
+      <td>1.002700</td>
+      <td>0.001373</td>
+      <td>0.117169</td>
+      <td>0.000685</td>
+      <td>0.005531</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.006117</td>
+      <td>0.004516</td>
+      <td>0.003200</td>
+      <td>NaN</td>
+      <td>0.008419</td>
+      <td>0.006527</td>
+      <td>0.009600</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-07-16</td>
+      <td>0.947248</td>
+      <td>0.002483</td>
+      <td>0.015193</td>
+      <td>1.000727</td>
+      <td>0.007605</td>
+      <td>0.117325</td>
+      <td>0.004653</td>
+      <td>0.009312</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.003671</td>
+      <td>0.004946</td>
+      <td>0.008889</td>
+      <td>NaN</td>
+      <td>0.001670</td>
+      <td>0.008126</td>
+      <td>0.009827</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-08-04</td>
+      <td>0.945964</td>
+      <td>0.001746</td>
+      <td>0.007863</td>
+      <td>1.005006</td>
+      <td>0.004220</td>
+      <td>0.110946</td>
+      <td>0.009857</td>
+      <td>0.009866</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.001924</td>
+      <td>0.008598</td>
+      <td>0.004529</td>
+      <td>NaN</td>
+      <td>0.000674</td>
+      <td>0.002223</td>
+      <td>0.002884</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-09-18</td>
+      <td>0.940705</td>
+      <td>0.002183</td>
+      <td>0.018859</td>
+      <td>1.008024</td>
+      <td>0.004509</td>
+      <td>0.103329</td>
+      <td>0.006603</td>
+      <td>0.000783</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.001336</td>
+      <td>0.004361</td>
+      <td>0.009387</td>
+      <td>NaN</td>
+      <td>0.007727</td>
+      <td>0.007661</td>
+      <td>0.002225</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-10-08</td>
+      <td>0.914767</td>
+      <td>0.003029</td>
+      <td>0.014324</td>
+      <td>1.000242</td>
+      <td>0.000263</td>
+      <td>0.108115</td>
+      <td>0.009527</td>
+      <td>0.007836</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.002397</td>
+      <td>0.008452</td>
+      <td>0.005553</td>
+      <td>NaN</td>
+      <td>0.001831</td>
+      <td>0.009616</td>
+      <td>0.007385</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-11-20</td>
+      <td>0.950845</td>
+      <td>0.009896</td>
+      <td>0.016888</td>
+      <td>1.003995</td>
+      <td>0.001789</td>
+      <td>0.102792</td>
+      <td>0.002519</td>
+      <td>0.009817</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.009742</td>
+      <td>0.003968</td>
+      <td>0.007945</td>
+      <td>NaN</td>
+      <td>0.008722</td>
+      <td>0.004369</td>
+      <td>0.000995</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-12-04</td>
+      <td>0.868580</td>
+      <td>0.001082</td>
+      <td>0.001930</td>
+      <td>1.007504</td>
+      <td>0.001772</td>
+      <td>0.100470</td>
+      <td>0.004626</td>
+      <td>0.006073</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.003611</td>
+      <td>0.009607</td>
+      <td>0.007266</td>
+      <td>NaN</td>
+      <td>0.008763</td>
+      <td>0.004753</td>
+      <td>0.009068</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 190 columns</p>
+</div></div></div>
+</div>
+<p>Procederemos a analizar el tipo de variables que contiene este dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traindata</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>customer_ID     object
+S_2             object
+P_2            float64
+D_39           float64
+B_1            float64
+                ...   
+D_141          float64
+D_142          float64
+D_143          float64
+D_144          float64
+D_145          float64
+Length: 190, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_variables</span> <span class="o">=</span> <span class="n">traindata</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span> <span class="s1">&#39;float64&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">cat_variables</span> <span class="o">=</span> <span class="n">traindata</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variables numéricas: </span><span class="si">{</span><span class="n">num_variables</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variables categóricas: </span><span class="si">{</span><span class="n">cat_variables</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables numéricas: 186
+Variables categóricas: 4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notamos que el dataset contiene un total de 186 variables numéricas y 4 variables categoricas. Sin embargo, analizando a detalle las variables notamos que algunas variables estaban siendo identificadas como númericas pero estas eran categoricas ordinales, asi que, más adelante se les dará el trato correspondiente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traindata</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>P_2</th>
+      <th>D_39</th>
+      <th>B_1</th>
+      <th>B_2</th>
+      <th>R_1</th>
+      <th>S_3</th>
+      <th>D_41</th>
+      <th>B_3</th>
+      <th>D_42</th>
+      <th>D_43</th>
+      <th>...</th>
+      <th>D_136</th>
+      <th>D_137</th>
+      <th>D_138</th>
+      <th>D_139</th>
+      <th>D_140</th>
+      <th>D_141</th>
+      <th>D_142</th>
+      <th>D_143</th>
+      <th>D_144</th>
+      <th>D_145</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5.485466e+06</td>
+      <td>5.531451e+06</td>
+      <td>5.531451e+06</td>
+      <td>5.529435e+06</td>
+      <td>5.531451e+06</td>
+      <td>4.510907e+06</td>
+      <td>5.529435e+06</td>
+      <td>5.529435e+06</td>
+      <td>791314.000000</td>
+      <td>3.873055e+06</td>
+      <td>...</td>
+      <td>1.946990e+05</td>
+      <td>1.946990e+05</td>
+      <td>1.946990e+05</td>
+      <td>5.429903e+06</td>
+      <td>5.490819e+06</td>
+      <td>5.429903e+06</td>
+      <td>944408.000000</td>
+      <td>5.429903e+06</td>
+      <td>5.490724e+06</td>
+      <td>5.429903e+06</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>6.563340e-01</td>
+      <td>1.531172e-01</td>
+      <td>1.240100e-01</td>
+      <td>6.214887e-01</td>
+      <td>7.880270e-02</td>
+      <td>2.258455e-01</td>
+      <td>5.978469e-02</td>
+      <td>1.325389e-01</td>
+      <td>0.184974</td>
+      <td>1.546841e-01</td>
+      <td>...</td>
+      <td>2.427725e-01</td>
+      <td>1.424409e-02</td>
+      <td>1.646183e-01</td>
+      <td>1.789305e-01</td>
+      <td>2.664348e-02</td>
+      <td>1.645212e-01</td>
+      <td>0.390799</td>
+      <td>1.788022e-01</td>
+      <td>5.238952e-02</td>
+      <td>6.233496e-02</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2.446494e-01</td>
+      <td>2.700709e-01</td>
+      <td>2.119869e-01</td>
+      <td>4.014877e-01</td>
+      <td>2.263971e-01</td>
+      <td>1.933475e-01</td>
+      <td>2.025443e-01</td>
+      <td>2.349929e-01</td>
+      <td>0.228185</td>
+      <td>2.133977e-01</td>
+      <td>...</td>
+      <td>2.101320e-01</td>
+      <td>9.571115e-02</td>
+      <td>2.670208e-01</td>
+      <td>3.790614e-01</td>
+      <td>1.455480e-01</td>
+      <td>3.482771e-01</td>
+      <td>0.236182</td>
+      <td>3.789498e-01</td>
+      <td>1.825135e-01</td>
+      <td>1.934937e-01</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-4.589548e-01</td>
+      <td>5.026190e-09</td>
+      <td>-7.588799e+00</td>
+      <td>9.192280e-09</td>
+      <td>1.534223e-09</td>
+      <td>-6.271320e-01</td>
+      <td>5.566545e-10</td>
+      <td>6.285293e-09</td>
+      <td>-0.000454</td>
+      <td>1.154550e-07</td>
+      <td>...</td>
+      <td>6.316773e-08</td>
+      <td>1.078787e-08</td>
+      <td>3.307923e-08</td>
+      <td>3.767347e-10</td>
+      <td>3.725073e-09</td>
+      <td>1.650100e-10</td>
+      <td>-0.014539</td>
+      <td>5.549692e-09</td>
+      <td>2.500991e-09</td>
+      <td>1.226024e-09</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>4.803307e-01</td>
+      <td>4.528464e-03</td>
+      <td>8.863645e-03</td>
+      <td>1.053313e-01</td>
+      <td>2.895934e-03</td>
+      <td>1.272588e-01</td>
+      <td>2.873244e-03</td>
+      <td>5.227570e-03</td>
+      <td>0.037516</td>
+      <td>4.227546e-02</td>
+      <td>...</td>
+      <td>9.314305e-03</td>
+      <td>2.532470e-03</td>
+      <td>3.517452e-03</td>
+      <td>3.027212e-03</td>
+      <td>2.555848e-03</td>
+      <td>3.026087e-03</td>
+      <td>0.199399</td>
+      <td>3.028116e-03</td>
+      <td>2.752896e-03</td>
+      <td>3.028347e-03</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>6.942950e-01</td>
+      <td>9.056902e-03</td>
+      <td>3.132968e-02</td>
+      <td>8.143328e-01</td>
+      <td>5.782230e-03</td>
+      <td>1.639082e-01</td>
+      <td>5.746725e-03</td>
+      <td>9.777230e-03</td>
+      <td>0.120519</td>
+      <td>8.851245e-02</td>
+      <td>...</td>
+      <td>2.539468e-01</td>
+      <td>5.069830e-03</td>
+      <td>7.037814e-03</td>
+      <td>6.053010e-03</td>
+      <td>5.110523e-03</td>
+      <td>6.051590e-03</td>
+      <td>0.382136</td>
+      <td>6.053151e-03</td>
+      <td>5.508129e-03</td>
+      <td>6.053248e-03</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>8.648159e-01</td>
+      <td>2.366407e-01</td>
+      <td>1.259019e-01</td>
+      <td>1.002403e+00</td>
+      <td>8.660590e-03</td>
+      <td>2.581017e-01</td>
+      <td>8.615665e-03</td>
+      <td>1.550507e-01</td>
+      <td>0.250869</td>
+      <td>1.843206e-01</td>
+      <td>...</td>
+      <td>2.582450e-01</td>
+      <td>7.573434e-03</td>
+      <td>5.015468e-01</td>
+      <td>9.080455e-03</td>
+      <td>7.663697e-03</td>
+      <td>9.078915e-03</td>
+      <td>0.559308</td>
+      <td>9.076287e-03</td>
+      <td>8.260447e-03</td>
+      <td>9.080930e-03</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.010000e+00</td>
+      <td>5.389619e+00</td>
+      <td>1.324060e+00</td>
+      <td>1.010000e+00</td>
+      <td>3.256284e+00</td>
+      <td>5.482888e+00</td>
+      <td>8.988807e+00</td>
+      <td>1.625262e+00</td>
+      <td>4.191119</td>
+      <td>1.011162e+01</td>
+      <td>...</td>
+      <td>1.759910e+00</td>
+      <td>1.009998e+00</td>
+      <td>3.005383e+00</td>
+      <td>1.010000e+00</td>
+      <td>1.010000e+00</td>
+      <td>1.339910e+00</td>
+      <td>2.229368</td>
+      <td>1.010000e+00</td>
+      <td>1.343331e+00</td>
+      <td>4.827630e+00</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 186 columns</p>
+</div></div></div>
+</div>
+<p>En la tabla anterior se puede observar la media, mediana, máximo, mínimo, desviación estandar y cuartiles.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categorical_columns</span> <span class="o">=</span> <span class="n">traindata</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">])</span>
+
+<span class="c1"># Mostrar las variables categóricas</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">categorical_columns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;customer_ID&#39;, &#39;S_2&#39;, &#39;D_63&#39;, &#39;D_64&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="datos-faltantes">
+<h2><strong>Datos faltantes</strong><a class="headerlink" href="#datos-faltantes" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">porcentaje_faltantes</span> <span class="o">=</span> <span class="p">(</span><span class="n">traindata</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>  <span class="c1"># Redondear y convertir a entero</span>
+
+<span class="c1"># Crear un DataFrame con los porcentajes en formato &quot;50%&quot;</span>
+<span class="n">tabla_faltantes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Variable&#39;</span><span class="p">:</span> <span class="n">porcentaje_faltantes</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s1">&#39;Porcentaje_Faltantes&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pct</span><span class="si">}</span><span class="s2">%&quot;</span> <span class="k">for</span> <span class="n">pct</span> <span class="ow">in</span> <span class="n">porcentaje_faltantes</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>  <span class="c1"># Formatear como &quot;50%&quot;</span>
+<span class="p">})</span>
+<span class="c1"># Mostrar la tabla completa</span>
+<span class="n">tabla_faltantes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>Porcentaje_Faltantes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>customer_ID</td>
+      <td>0%</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>S_2</td>
+      <td>0%</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>P_2</td>
+      <td>1%</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>D_39</td>
+      <td>0%</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>B_1</td>
+      <td>0%</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>185</th>
+      <td>D_141</td>
+      <td>2%</td>
+    </tr>
+    <tr>
+      <th>186</th>
+      <td>D_142</td>
+      <td>83%</td>
+    </tr>
+    <tr>
+      <th>187</th>
+      <td>D_143</td>
+      <td>2%</td>
+    </tr>
+    <tr>
+      <th>188</th>
+      <td>D_144</td>
+      <td>1%</td>
+    </tr>
+    <tr>
+      <th>189</th>
+      <td>D_145</td>
+      <td>2%</td>
+    </tr>
+  </tbody>
+</table>
+<p>190 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>El la tabla anterior obtuvimos el porcentaje de datos faltantes en cada una de las variables. Procederemos a eliminar las variables que contengan un porcentaje de datos faltantes mayor al 50%. Esto con el fin de reducir la dimensionalidad de datos, además son datos que no contienen observaciónes que puedan servir en el transcurso del ejercicio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variables_a_conservar</span> <span class="o">=</span> <span class="n">porcentaje_faltantes</span><span class="p">[</span><span class="n">porcentaje_faltantes</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+
+<span class="c1"># Crear un nuevo DataFrame sin las columnas con 50% o más de datos faltantes</span>
+<span class="n">nona_traindata</span> <span class="o">=</span> <span class="n">traindata</span><span class="p">[</span><span class="n">variables_a_conservar</span><span class="p">]</span>
+
+<span class="c1"># Mostrar el nuevo DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nuevo DataFrame sin variables con 50</span><span class="si">% o</span><span class="s2"> más de datos faltantes:&quot;</span><span class="p">)</span>
+<span class="n">nona_traindata</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>  <span class="c1"># Muestra las primeras filas del nuevo DataFrame</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nuevo DataFrame sin variables con 50% o más de datos faltantes:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_ID</th>
+      <th>S_2</th>
+      <th>P_2</th>
+      <th>D_39</th>
+      <th>B_1</th>
+      <th>B_2</th>
+      <th>R_1</th>
+      <th>S_3</th>
+      <th>D_41</th>
+      <th>B_3</th>
+      <th>...</th>
+      <th>D_130</th>
+      <th>D_131</th>
+      <th>D_133</th>
+      <th>R_28</th>
+      <th>D_139</th>
+      <th>D_140</th>
+      <th>D_141</th>
+      <th>D_143</th>
+      <th>D_144</th>
+      <th>D_145</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-03-09</td>
+      <td>0.938469</td>
+      <td>0.001733</td>
+      <td>0.008724</td>
+      <td>1.006838</td>
+      <td>0.009228</td>
+      <td>0.124035</td>
+      <td>0.008771</td>
+      <td>0.004709</td>
+      <td>...</td>
+      <td>0.002052</td>
+      <td>0.005972</td>
+      <td>0.004345</td>
+      <td>0.001535</td>
+      <td>0.002427</td>
+      <td>0.003706</td>
+      <td>0.003818</td>
+      <td>0.000569</td>
+      <td>0.000610</td>
+      <td>0.002674</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-04-07</td>
+      <td>0.936665</td>
+      <td>0.005775</td>
+      <td>0.004923</td>
+      <td>1.000653</td>
+      <td>0.006151</td>
+      <td>0.126750</td>
+      <td>0.000798</td>
+      <td>0.002714</td>
+      <td>...</td>
+      <td>0.001034</td>
+      <td>0.004838</td>
+      <td>0.007495</td>
+      <td>0.004931</td>
+      <td>0.003954</td>
+      <td>0.003167</td>
+      <td>0.005032</td>
+      <td>0.009576</td>
+      <td>0.005492</td>
+      <td>0.009217</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-05-28</td>
+      <td>0.954180</td>
+      <td>0.091505</td>
+      <td>0.021655</td>
+      <td>1.009672</td>
+      <td>0.006815</td>
+      <td>0.123977</td>
+      <td>0.007598</td>
+      <td>0.009423</td>
+      <td>...</td>
+      <td>0.005681</td>
+      <td>0.005497</td>
+      <td>0.009227</td>
+      <td>0.009123</td>
+      <td>0.003269</td>
+      <td>0.007329</td>
+      <td>0.000427</td>
+      <td>0.003429</td>
+      <td>0.006986</td>
+      <td>0.002603</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-06-13</td>
+      <td>0.960384</td>
+      <td>0.002455</td>
+      <td>0.013683</td>
+      <td>1.002700</td>
+      <td>0.001373</td>
+      <td>0.117169</td>
+      <td>0.000685</td>
+      <td>0.005531</td>
+      <td>...</td>
+      <td>0.007108</td>
+      <td>0.008261</td>
+      <td>0.007206</td>
+      <td>0.002409</td>
+      <td>0.006117</td>
+      <td>0.004516</td>
+      <td>0.003200</td>
+      <td>0.008419</td>
+      <td>0.006527</td>
+      <td>0.009600</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-07-16</td>
+      <td>0.947248</td>
+      <td>0.002483</td>
+      <td>0.015193</td>
+      <td>1.000727</td>
+      <td>0.007605</td>
+      <td>0.117325</td>
+      <td>0.004653</td>
+      <td>0.009312</td>
+      <td>...</td>
+      <td>0.009680</td>
+      <td>0.004848</td>
+      <td>0.006312</td>
+      <td>0.004462</td>
+      <td>0.003671</td>
+      <td>0.004946</td>
+      <td>0.008889</td>
+      <td>0.001670</td>
+      <td>0.008126</td>
+      <td>0.009827</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 160 columns</p>
+</div></div></div>
+</div>
+<p>Creamos un nuevo dataframe que no contenga las variables que eliminamos anteriormente.</p>
+</section>
+<section id="correlacion-y-multicolinealidad">
+<h2><strong>Correlación y multicolinealidad</strong><a class="headerlink" href="#correlacion-y-multicolinealidad" title="Link to this heading">#</a></h2>
+<p>Realizamos un código para conocer la correlación entre variables y luego poder reducir la multicolinealidad</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric_data</span> <span class="o">=</span> <span class="n">nona_traindata</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span>
+<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">numeric_data</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            P_2      D_39       B_1       B_2       R_1       S_3      D_41  \
+P_2    1.000000 -0.191551 -0.368003  0.545083 -0.464548 -0.334633 -0.317395   
+D_39  -0.191551  1.000000  0.183356 -0.194832  0.194509  0.052350  0.440503   
+B_1   -0.368003  0.183356  1.000000 -0.631075  0.229492  0.155834  0.185095   
+B_2    0.545083 -0.194832 -0.631075  1.000000 -0.303907 -0.235561 -0.257901   
+R_1   -0.464548  0.194509  0.229492 -0.303907  1.000000  0.212158  0.275890   
+...         ...       ...       ...       ...       ...       ...       ...   
+D_140 -0.138198  0.022463  0.054776 -0.094415  0.066854  0.060505  0.035893   
+D_141 -0.180141  0.032016  0.103099 -0.152619  0.080836  0.046756  0.049332   
+D_143 -0.184773  0.032051  0.103864 -0.154545  0.082147  0.049118  0.049851   
+D_144  0.006733  0.009343  0.036570 -0.039635  0.004660 -0.019125  0.010392   
+D_145 -0.165209  0.024202  0.078757 -0.124659  0.073060  0.045380  0.042079   
+
+            B_3      D_43      D_44  ...     D_130     D_131     D_133  \
+P_2   -0.454154 -0.299000 -0.575777  ... -0.213657 -0.213855 -0.140626   
+D_39   0.173106  0.046419  0.135196  ...  0.046036  0.050498  0.037326   
+B_1    0.729890  0.071996  0.327623  ...  0.140859  0.140954  0.107760   
+B_2   -0.713539 -0.142679 -0.449014  ... -0.201631 -0.199702 -0.147801   
+R_1    0.272562  0.187207  0.399099  ...  0.124346  0.132822  0.090881   
+...         ...       ...       ...  ...       ...       ...       ...   
+D_140  0.077797  0.063053  0.095140  ...  0.049537  0.055429  0.034181   
+D_141  0.131708  0.069027  0.125197  ...  0.105626  0.104005  0.070363   
+D_143  0.132831  0.071392  0.126616  ...  0.105704  0.104440  0.070429   
+D_144  0.041107 -0.008098  0.020574  ...  0.042128  0.037013  0.031941   
+D_145  0.107736  0.066420  0.109918  ...  0.067939  0.071972  0.046317   
+
+           R_28     D_139     D_140     D_141     D_143     D_144     D_145  
+P_2   -0.016268 -0.184728 -0.138198 -0.180141 -0.184773  0.006733 -0.165209  
+D_39  -0.000401  0.032060  0.022463  0.032016  0.032051  0.009343  0.024202  
+B_1    0.051541  0.103833  0.054776  0.103099  0.103864  0.036570  0.078757  
+B_2   -0.027241 -0.154482 -0.094415 -0.152619 -0.154545 -0.039635 -0.124659  
+R_1    0.040477  0.082094  0.066854  0.080836  0.082147  0.004660  0.073060  
+...         ...       ...       ...       ...       ...       ...       ...  
+D_140  0.003047  0.325933  1.000000  0.324814  0.325544 -0.038592  0.214737  
+D_141  0.004820  0.998168  0.324814  1.000000  0.997691  0.595004  0.632198  
+D_143  0.004932  0.999498  0.325544  0.997691  1.000000  0.568105  0.645761  
+D_144 -0.000586  0.569267 -0.038592  0.595004  0.568105  1.000000  0.214547  
+D_145  0.003192  0.645738  0.214737  0.632198  0.645761  0.214547  1.000000  
+
+[156 rows x 156 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Luego eliminaremos las variables que estan altamente correlacionadas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">correlation_matrix</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span>
+
+<span class="c1"># Encontrar columnas a eliminar</span>
+<span class="n">to_drop</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">mask</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">column</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">to_drop</span><span class="p">:</span>
+        <span class="n">correlated_columns</span> <span class="o">=</span> <span class="n">mask</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">correlated_columns</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
+            <span class="n">to_drop</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">correlated_columns</span><span class="p">[</span><span class="n">correlated_columns</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">cleaned_correlation_matrix</span> <span class="o">=</span> <span class="n">correlation_matrix</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">to_drop</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">to_drop</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cleaned_correlation_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           D_39       R_1      D_41      D_43       B_5      D_46       B_6  \
+D_39   1.000000  0.194509  0.440503  0.046419  0.045796  0.031154 -0.019297   
+R_1    0.194509  1.000000  0.275890  0.187207 -0.030210  0.083790 -0.023791   
+D_41   0.440503  0.275890  1.000000  0.059477  0.013984  0.009704 -0.018549   
+D_43   0.046419  0.187207  0.059477  1.000000 -0.018393  0.095724 -0.021353   
+B_5    0.045796 -0.030210  0.013984 -0.018393  1.000000 -0.012276  0.009241   
+...         ...       ...       ...       ...       ...       ...       ...   
+D_130  0.046036  0.124346  0.058082  0.144176 -0.034333  0.049149 -0.023376   
+R_28  -0.000401  0.040477 -0.004237  0.012841 -0.004152  0.003626 -0.001578   
+D_140  0.022463  0.066854  0.035893  0.063053 -0.018091  0.023146 -0.008453   
+D_144  0.009343  0.004660  0.010392 -0.008098 -0.004837  0.005112 -0.006698   
+D_145  0.024202  0.073060  0.042079  0.066420 -0.025357  0.026224 -0.012430   
+
+           D_51       B_9       R_3  ...     D_124     D_125     D_126  \
+D_39   0.006714  0.185815  0.031888  ...  0.045265  0.007649  0.015955   
+R_1   -0.128350  0.317733  0.168084  ...  0.051957  0.035745  0.000652   
+D_41  -0.075164  0.211883  0.031497  ...  0.037379  0.013319  0.007542   
+D_43  -0.103881  0.182825  0.694812  ...  0.058761  0.053089 -0.021914   
+B_5    0.204886 -0.049727 -0.018923  ...  0.057507 -0.002707  0.019051   
+...         ...       ...       ...  ...       ...       ...       ...   
+D_130 -0.119313  0.168443  0.142023  ...  0.117675  0.019385  0.030931   
+R_28  -0.013610  0.023455  0.028678  ...  0.004177  0.001458 -0.004186   
+D_140 -0.059239  0.102501  0.067581  ...  0.019945  0.028706 -0.004011   
+D_144 -0.020779  0.026916  0.000104  ...  0.029117  0.014035 -0.003313   
+D_145 -0.086459  0.134574  0.076013  ...  0.003233  0.056500 -0.029662   
+
+          D_127      B_41     D_130      R_28     D_140     D_144     D_145  
+D_39   0.016992  0.064986  0.046036 -0.000401  0.022463  0.009343  0.024202  
+R_1   -0.094490  0.104334  0.124346  0.040477  0.066854  0.004660  0.073060  
+D_41  -0.040714  0.140432  0.058082 -0.004237  0.035893  0.010392  0.042079  
+D_43  -0.086735  0.059004  0.144176  0.012841  0.063053 -0.008098  0.066420  
+B_5    0.122236 -0.014862 -0.034333 -0.004152 -0.018091 -0.004837 -0.025357  
+...         ...       ...       ...       ...       ...       ...       ...  
+D_130 -0.094420  0.022381  1.000000  0.014315  0.049537  0.042128  0.067939  
+R_28  -0.009129 -0.000755  0.014315  1.000000  0.003047 -0.000586  0.003192  
+D_140 -0.041760  0.017743  0.049537  0.003047  1.000000 -0.038592  0.214737  
+D_144 -0.017063 -0.001482  0.042128 -0.000586 -0.038592  1.000000  0.214547  
+D_145 -0.064085  0.019583  0.067939  0.003192  0.214737  0.214547  1.000000  
+
+[92 rows x 92 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_traindata</span> <span class="o">=</span> <span class="n">nona_traindata</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">to_drop</span><span class="p">)</span>
+<span class="n">new_traindata</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;traindata_new&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>convertiremos las variables que identificamos que eran categoricas pero no estaban correctamente clasificadas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">convert</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;D_114&#39;</span><span class="p">,</span><span class="s1">&#39;D_116&#39;</span><span class="p">,</span><span class="s1">&#39;D_117&#39;</span><span class="p">,</span><span class="s1">&#39;D_120&#39;</span><span class="p">,</span><span class="s1">&#39;D_126&#39;</span><span class="p">]</span>
+
+<span class="n">new_traindata</span><span class="p">[</span><span class="n">convert</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_traindata</span><span class="p">[</span><span class="n">convert</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fue creado un nuevo dataframe con las variables que quedaron despues de los procesos anteriores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newdatatrain</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C:\Users\Usuario\Pictures\SegundoParcial_ML\traindata_new&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newdatatrain</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_ID</th>
+      <th>S_2</th>
+      <th>D_39</th>
+      <th>R_1</th>
+      <th>D_41</th>
+      <th>D_43</th>
+      <th>B_5</th>
+      <th>D_46</th>
+      <th>B_6</th>
+      <th>D_51</th>
+      <th>...</th>
+      <th>D_124</th>
+      <th>D_125</th>
+      <th>D_126</th>
+      <th>D_127</th>
+      <th>B_41</th>
+      <th>D_130</th>
+      <th>R_28</th>
+      <th>D_140</th>
+      <th>D_144</th>
+      <th>D_145</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-03-09</td>
+      <td>0.001733</td>
+      <td>0.009228</td>
+      <td>0.008771</td>
+      <td>NaN</td>
+      <td>0.170600</td>
+      <td>0.358587</td>
+      <td>0.063902</td>
+      <td>1.335856</td>
+      <td>...</td>
+      <td>0.686516</td>
+      <td>0.008740</td>
+      <td>1.0</td>
+      <td>1.003319</td>
+      <td>0.006805</td>
+      <td>0.002052</td>
+      <td>0.001535</td>
+      <td>0.003706</td>
+      <td>0.000610</td>
+      <td>0.002674</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-04-07</td>
+      <td>0.005775</td>
+      <td>0.006151</td>
+      <td>0.000798</td>
+      <td>NaN</td>
+      <td>0.113239</td>
+      <td>0.353630</td>
+      <td>0.065261</td>
+      <td>1.339794</td>
+      <td>...</td>
+      <td>0.686414</td>
+      <td>0.000755</td>
+      <td>1.0</td>
+      <td>1.008394</td>
+      <td>0.004407</td>
+      <td>0.001034</td>
+      <td>0.004931</td>
+      <td>0.003167</td>
+      <td>0.005492</td>
+      <td>0.009217</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-05-28</td>
+      <td>0.091505</td>
+      <td>0.006815</td>
+      <td>0.007598</td>
+      <td>NaN</td>
+      <td>0.060492</td>
+      <td>0.334650</td>
+      <td>0.066982</td>
+      <td>1.337179</td>
+      <td>...</td>
+      <td>0.690101</td>
+      <td>0.009617</td>
+      <td>1.0</td>
+      <td>1.009307</td>
+      <td>0.003221</td>
+      <td>0.005681</td>
+      <td>0.009123</td>
+      <td>0.007329</td>
+      <td>0.006986</td>
+      <td>0.002603</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-06-13</td>
+      <td>0.002455</td>
+      <td>0.001373</td>
+      <td>0.000685</td>
+      <td>NaN</td>
+      <td>0.166782</td>
+      <td>0.323271</td>
+      <td>0.083720</td>
+      <td>1.339909</td>
+      <td>...</td>
+      <td>0.687779</td>
+      <td>0.004649</td>
+      <td>1.0</td>
+      <td>1.001671</td>
+      <td>0.007703</td>
+      <td>0.007108</td>
+      <td>0.002409</td>
+      <td>0.004516</td>
+      <td>0.006527</td>
+      <td>0.009600</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-07-16</td>
+      <td>0.002483</td>
+      <td>0.007605</td>
+      <td>0.004653</td>
+      <td>NaN</td>
+      <td>0.143630</td>
+      <td>0.231009</td>
+      <td>0.075900</td>
+      <td>1.341735</td>
+      <td>...</td>
+      <td>0.688774</td>
+      <td>0.000097</td>
+      <td>1.0</td>
+      <td>1.009886</td>
+      <td>0.009823</td>
+      <td>0.009680</td>
+      <td>0.004462</td>
+      <td>0.004946</td>
+      <td>0.008126</td>
+      <td>0.009827</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-08-04</td>
+      <td>0.001746</td>
+      <td>0.004220</td>
+      <td>0.009857</td>
+      <td>NaN</td>
+      <td>0.138303</td>
+      <td>0.275963</td>
+      <td>0.095784</td>
+      <td>1.000580</td>
+      <td>...</td>
+      <td>0.682297</td>
+      <td>0.009305</td>
+      <td>1.0</td>
+      <td>1.004481</td>
+      <td>0.004723</td>
+      <td>0.005151</td>
+      <td>0.007329</td>
+      <td>0.008598</td>
+      <td>0.002223</td>
+      <td>0.002884</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-09-18</td>
+      <td>0.002183</td>
+      <td>0.004509</td>
+      <td>0.006603</td>
+      <td>NaN</td>
+      <td>0.108522</td>
+      <td>0.307869</td>
+      <td>0.104519</td>
+      <td>1.001669</td>
+      <td>...</td>
+      <td>0.682368</td>
+      <td>0.006347</td>
+      <td>1.0</td>
+      <td>1.002352</td>
+      <td>0.009490</td>
+      <td>0.002169</td>
+      <td>0.004517</td>
+      <td>0.004361</td>
+      <td>0.007661</td>
+      <td>0.002225</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-10-08</td>
+      <td>0.003029</td>
+      <td>0.000263</td>
+      <td>0.009527</td>
+      <td>NaN</td>
+      <td>0.187638</td>
+      <td>0.519619</td>
+      <td>0.108926</td>
+      <td>0.671205</td>
+      <td>...</td>
+      <td>0.687171</td>
+      <td>0.009099</td>
+      <td>1.0</td>
+      <td>1.005820</td>
+      <td>0.006505</td>
+      <td>0.007823</td>
+      <td>0.000139</td>
+      <td>0.008452</td>
+      <td>0.009616</td>
+      <td>0.007385</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-11-20</td>
+      <td>0.009896</td>
+      <td>0.001789</td>
+      <td>0.002519</td>
+      <td>NaN</td>
+      <td>0.178574</td>
+      <td>0.430077</td>
+      <td>0.122928</td>
+      <td>0.669801</td>
+      <td>...</td>
+      <td>0.687715</td>
+      <td>0.000269</td>
+      <td>1.0</td>
+      <td>1.009925</td>
+      <td>0.009973</td>
+      <td>0.006652</td>
+      <td>0.005738</td>
+      <td>0.003968</td>
+      <td>0.004369</td>
+      <td>0.000995</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-12-04</td>
+      <td>0.001082</td>
+      <td>0.001772</td>
+      <td>0.004626</td>
+      <td>NaN</td>
+      <td>0.189011</td>
+      <td>0.430871</td>
+      <td>0.221899</td>
+      <td>0.668379</td>
+      <td>...</td>
+      <td>0.683206</td>
+      <td>0.005513</td>
+      <td>1.0</td>
+      <td>1.002499</td>
+      <td>0.007171</td>
+      <td>0.004976</td>
+      <td>0.001212</td>
+      <td>0.009607</td>
+      <td>0.004753</td>
+      <td>0.009068</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 96 columns</p>
+</div></div></div>
+</div>
+<p>Se analizaron los datos faltantes en este nuevo dataset y, dado que se han mantenido solo las variables con un porcentaje de datos faltantes inferior al 50%, utilizaremos un método de imputación, aplicando la media o la mediana según la distribución de los datos de cada variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Valores faltantes antes de la imputación:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newdatatrain</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valores faltantes antes de la imputación:
+customer_ID         0
+S_2                 0
+D_39                0
+R_1                 0
+D_41             2016
+                ...  
+D_130          101548
+R_28                0
+D_140           40632
+D_144           40727
+D_145          101548
+Length: 96, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>A continuación la función que fue utilizada par imputar los datos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">imputar_valores</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df_imputado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Verifica si hay valores faltantes</span>
+            
+            <span class="c1"># Calcular skewness (asimetría)</span>
+            <span class="n">asimetria</span> <span class="o">=</span> <span class="n">skew</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+            
+            <span class="c1"># Calcular cuartiles para detectar outliers</span>
+            <span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+            <span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+            <span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+            <span class="n">rango_inferior</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+            <span class="n">rango_superior</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+            
+            <span class="n">outliers</span> <span class="o">=</span> <span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rango_inferior</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rango_superior</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            
+            <span class="c1"># Decisión basada en la asimetría y outliers</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">asimetria</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="ow">and</span> <span class="n">outliers</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">df_imputado</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">df_imputado</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df_imputado</span>
+
+
+<span class="n">df_imputado</span> <span class="o">=</span> <span class="n">imputar_valores</span><span class="p">(</span><span class="n">newdatatrain</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_imputado</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;traindata_imp&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrain_imp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C:\Users\Usuario\Pictures\SegundoParcial_ML\traindata_imp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Valores faltantes después de la imputación:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">datatrain_imp</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valores faltantes después de la imputación:
+customer_ID    0
+S_2            0
+D_39           0
+R_1            0
+D_41           0
+              ..
+D_130          0
+R_28           0
+D_140          0
+D_144          0
+D_145          0
+Length: 96, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos observar que la imputación fue exitosa ya que obtuvimos 0% en los porcentajes de datos faltantes de cada variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categorical_columns</span> <span class="o">=</span> <span class="n">new_traindata</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">categorical_columns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;customer_ID&#39;, &#39;S_2&#39;, &#39;D_63&#39;, &#39;D_64&#39;, &#39;D_114&#39;, &#39;D_116&#39;, &#39;D_117&#39;,
+       &#39;D_120&#39;, &#39;D_126&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="codificacion-de-las-variables-categorias">
+<h2><strong>codificación de las variables categórias.</strong><a class="headerlink" href="#codificacion-de-las-variables-categorias" title="Link to this heading">#</a></h2>
+<p>Realizamos codificación de variables categoricas usando OneHotEncoder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">to_encode</span><span class="o">=</span><span class="n">datatrain_imp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">to_encode</span><span class="o">=</span><span class="n">to_encode</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categorical_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;D_63&#39;</span><span class="p">,</span> <span class="s1">&#39;D_64&#39;</span><span class="p">,</span> <span class="s1">&#39;D_114&#39;</span><span class="p">,</span> <span class="s1">&#39;D_116&#39;</span><span class="p">,</span> <span class="s1">&#39;D_117&#39;</span><span class="p">,</span><span class="s1">&#39;D_120&#39;</span><span class="p">,</span> <span class="s1">&#39;D_126&#39;</span><span class="p">]</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">one_hot_encoded</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">to_encode</span><span class="p">[</span><span class="n">categorical_columns</span><span class="p">])</span>
+<span class="n">one_hot_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">one_hot_encoded</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">(</span><span class="n">categorical_columns</span><span class="p">))</span>
+<span class="n">df_encoded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">to_encode</span><span class="p">,</span> <span class="n">one_hot_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_encoded_traindata</span> <span class="o">=</span> <span class="n">df_encoded</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">categorical_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_encoded_traindata</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;encoded_traindata&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_encoded_traindata</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>customer_ID</th>
+      <th>S_2</th>
+      <th>D_39</th>
+      <th>R_1</th>
+      <th>D_41</th>
+      <th>D_43</th>
+      <th>B_5</th>
+      <th>D_46</th>
+      <th>B_6</th>
+      <th>...</th>
+      <th>D_117_2.319056498594235</th>
+      <th>D_117_3.0</th>
+      <th>D_117_4.0</th>
+      <th>D_117_5.0</th>
+      <th>D_117_6.0</th>
+      <th>D_120_0.0</th>
+      <th>D_120_1.0</th>
+      <th>D_126_-1.0</th>
+      <th>D_126_0.0</th>
+      <th>D_126_1.0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-03-09</td>
+      <td>0.001733</td>
+      <td>0.009228</td>
+      <td>0.008771</td>
+      <td>0.088512</td>
+      <td>0.170600</td>
+      <td>0.358587</td>
+      <td>0.063902</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-04-07</td>
+      <td>0.005775</td>
+      <td>0.006151</td>
+      <td>0.000798</td>
+      <td>0.088512</td>
+      <td>0.113239</td>
+      <td>0.353630</td>
+      <td>0.065261</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-05-28</td>
+      <td>0.091505</td>
+      <td>0.006815</td>
+      <td>0.007598</td>
+      <td>0.088512</td>
+      <td>0.060492</td>
+      <td>0.334650</td>
+      <td>0.066982</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-06-13</td>
+      <td>0.002455</td>
+      <td>0.001373</td>
+      <td>0.000685</td>
+      <td>0.088512</td>
+      <td>0.166782</td>
+      <td>0.323271</td>
+      <td>0.083720</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>0000099d6bd597052cdcda90ffabf56573fe9d7c79be5f...</td>
+      <td>2017-07-16</td>
+      <td>0.002483</td>
+      <td>0.007605</td>
+      <td>0.004653</td>
+      <td>0.088512</td>
+      <td>0.143630</td>
+      <td>0.231009</td>
+      <td>0.075900</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5531446</th>
+      <td>5531446</td>
+      <td>fffff1d38b785cef84adeace64f8f83db3a0c31e8d92ea...</td>
+      <td>2017-11-05</td>
+      <td>0.416013</td>
+      <td>0.003487</td>
+      <td>0.005340</td>
+      <td>0.014225</td>
+      <td>0.035575</td>
+      <td>0.395745</td>
+      <td>0.122715</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5531447</th>
+      <td>5531447</td>
+      <td>fffff1d38b785cef84adeace64f8f83db3a0c31e8d92ea...</td>
+      <td>2017-12-23</td>
+      <td>0.296536</td>
+      <td>0.005904</td>
+      <td>0.002243</td>
+      <td>0.009467</td>
+      <td>0.029612</td>
+      <td>0.394486</td>
+      <td>0.171524</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5531448</th>
+      <td>5531448</td>
+      <td>fffff1d38b785cef84adeace64f8f83db3a0c31e8d92ea...</td>
+      <td>2018-01-06</td>
+      <td>0.443984</td>
+      <td>0.003457</td>
+      <td>0.002111</td>
+      <td>0.006591</td>
+      <td>0.011857</td>
+      <td>0.396050</td>
+      <td>0.181703</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5531449</th>
+      <td>5531449</td>
+      <td>fffff1d38b785cef84adeace64f8f83db3a0c31e8d92ea...</td>
+      <td>2018-02-06</td>
+      <td>0.442553</td>
+      <td>0.005117</td>
+      <td>0.009930</td>
+      <td>0.014235</td>
+      <td>0.019532</td>
+      <td>0.434467</td>
+      <td>0.161841</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5531450</th>
+      <td>5531450</td>
+      <td>fffff1d38b785cef84adeace64f8f83db3a0c31e8d92ea...</td>
+      <td>2018-03-14</td>
+      <td>0.002474</td>
+      <td>0.000809</td>
+      <td>0.003287</td>
+      <td>0.013455</td>
+      <td>0.006617</td>
+      <td>0.459745</td>
+      <td>0.233117</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5531451 rows × 119 columns</p>
+</div></div></div>
+</div>
+<p>El data set anterior es que resulto despues de la codificación, sin datos faltantes ni variables correlacionadas entre si.</p>
+<section id="vif">
+<h3><strong>Vif</strong><a class="headerlink" href="#vif" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">VIF_calculation</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">VIF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">VIF</span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">VIF</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="n">VIF</span> <span class="o">=</span> <span class="n">VIF</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;VIF&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">VIF</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">delete_multicollinearity</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">target_name</span><span class="p">,</span> <span class="n">VIF_threshold</span><span class="p">):</span>
+  <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">target_name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">VIF_mat</span> <span class="o">=</span> <span class="n">VIF_calculation</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+  <span class="n">n_VIF</span> <span class="o">=</span> <span class="n">VIF_mat</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">n_VIF</span> <span class="o">&lt;=</span> <span class="n">VIF_threshold</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no multicollinearity!&quot;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">n_VIF</span> <span class="o">&gt;</span> <span class="n">VIF_threshold</span><span class="p">):</span>
+      <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">VIF_mat</span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">VIF_mat</span> <span class="o">=</span> <span class="n">VIF_calculation</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+      <span class="n">n_VIF</span> <span class="o">=</span> <span class="n">VIF_mat</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">display</span><span class="p">(</span><span class="n">VIF_mat</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">X</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="graficas">
+<h2><strong>Gráficas</strong><a class="headerlink" href="#graficas" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="n">df_encoded_traindata</span><span class="p">[</span><span class="s1">&#39;S_2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">top_5_counts</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">top_5_counts</span><span class="o">.</span><span class="n">values</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cell</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">cell</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">top_5_counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">top_5_counts</span><span class="o">.</span><span class="n">values</span><span class="p">)]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Purples_r&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+<span class="c1"># Crear el gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">squarify</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sizes</span><span class="o">=</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de Fechas&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/15fe1b76d2879db8e964f03cd1ec60b0521931820039549be3043f838ab1edf8.png" src="_images/15fe1b76d2879db8e964f03cd1ec60b0521931820039549be3043f838ab1edf8.png" />
+</div>
+</div>
+<p>Se realizó una gráfica para poder analizar las 10 fechas con más observaciones de nuestro dataset y obtuvimos que el día con mas observaciónes fue el <code class="docutils literal notranslate"><span class="pre">17-02-18</span></code> seguido por <code class="docutils literal notranslate"><span class="pre">20-01-18</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">customer_counts</span> <span class="o">=</span> <span class="n">df_encoded_traindata</span><span class="p">[</span><span class="s1">&#39;customer_ID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="c1"># Seleccionar los 5 clientes con más observaciones</span>
+<span class="n">top_5_customers</span> <span class="o">=</span> <span class="n">customer_counts</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">top_5_customers</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Cambiar los nombres a versiones más cortas</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Cliente </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">top_5_customers</span><span class="p">))]</span>
+
+<span class="c1"># Crear el gráfico de barras</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">values</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Purples_r&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Top 5 Clientes con Más Observaciones&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Cliente&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Observaciones&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Rotar las etiquetas para mejor visibilidad</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f74bd79cfdc1539df4169b3802cbb53a6954a1f474f1d56ec82d62f2cd6556c1.png" src="_images/f74bd79cfdc1539df4169b3802cbb53a6954a1f474f1d56ec82d62f2cd6556c1.png" />
+</div>
+</div>
+<p>Realizamos un diagrama de barras para ver los 10 clientes con mas observaciones de nuestro dataset y como se puede observar todos los 10 clientes cuentan con la misma cantidad de observaciones, aproximadamente 13 observaciones.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="EDA_clasifi.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>EDA Wind Speed</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="punto2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Punto 2</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos"><strong>Análisis Exploratorio de Datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-faltantes"><strong>Datos faltantes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlacion-y-multicolinealidad"><strong>Correlación y multicolinealidad</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#codificacion-de-las-variables-categorias"><strong>codificación de las variables categórias.</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vif"><strong>Vif</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas"><strong>Gráficas</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gwyneth Blanco & Nicoll Fontalvo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

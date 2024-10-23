@@ -1,0 +1,2629 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Punto 3 &#8212; Parcial práctico 2 Machine Learning.</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'punto3';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Punto 2" href="punto2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/uninortelogo.jpeg" class="logo__image only-light" alt="Parcial práctico 2 Machine Learning. - Home"/>
+    <script>document.write(`<img src="_static/uninortelogo.jpeg" class="logo__image only-dark" alt="Parcial práctico 2 Machine Learning. - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Entrega parcial práctico #2
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="EDA_clasifi.html"><strong>EDA Wind Speed</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="EDA_regre.html"><strong>EDA Default Probability Prediction</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="punto2.html"><strong>Punto 2</strong></a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Punto 3</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpunto3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/punto3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Punto 3</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nn"><strong>K-NN</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados"><strong>Resultados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#promedio-por-ventana"><em><strong>Promedio por ventana</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge"><strong>Ridge</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Resultados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#promedio-por-ventanas"><em><strong>Promedio por ventanas</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso"><strong>Lasso</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Resultados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><em><strong>Promedio por ventana</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal"><strong>Regresión lineal</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Resultados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><em><strong>Promedio por ventana</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="punto-3">
+<h1><strong>Punto 3</strong><a class="headerlink" href="#punto-3" title="Link to this heading">#</a></h1>
+<p>Modelos de Regresión. Considere el conjunto de datos Wind Speed. Implemente la versión de regresión de cada uno de los modelos estudiados en clases, para predecir velocidad del viento horaria (VENTO,
+VELOCIDADE HORARIA (m/s)) en el conjunto de datos suministrado.</p>
+<p>Luego de hacer el análisis exploratorio de las variables, encontramos al final cual seria nuestro conjunto final para entrenar y testear nuestros modelos que en este caso serán <code class="docutils literal notranslate"><span class="pre">K-NN</span></code>, <code class="docutils literal notranslate"><span class="pre">Regresion</span> <span class="pre">lineal</span></code>, <code class="docutils literal notranslate"><span class="pre">Regresion</span> <span class="pre">Ridge</span></code> y <code class="docutils literal notranslate"><span class="pre">Regresion</span> <span class="pre">Lasso</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">Ridge</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">jarque_bera</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wind</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;C:/Users/fonta/OneDrive/Documentos/CDD/6. Sexto semestre/Machine learning/Segundo parcial/wind_speed.csv&quot;</span><span class="p">)</span>
+<span class="n">wind</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hora</th>
+      <th>dir_viento</th>
+      <th>vel_viento</th>
+      <th>humedad_max</th>
+      <th>humedad_min</th>
+      <th>temperatura_max</th>
+      <th>temperatura_min</th>
+      <th>precipita_total</th>
+      <th>rafagamax_viento</th>
+      <th>presionatm_max</th>
+      <th>presionatm_min</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12:00</td>
+      <td>0.809017</td>
+      <td>1.8</td>
+      <td>69.0</td>
+      <td>60.0</td>
+      <td>22.6</td>
+      <td>20.7</td>
+      <td>0.0</td>
+      <td>3.8</td>
+      <td>888.2</td>
+      <td>887.7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13:00</td>
+      <td>0.965926</td>
+      <td>2.7</td>
+      <td>62.0</td>
+      <td>55.0</td>
+      <td>24.2</td>
+      <td>22.5</td>
+      <td>0.0</td>
+      <td>4.7</td>
+      <td>888.4</td>
+      <td>888.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>14:00</td>
+      <td>0.891007</td>
+      <td>2.0</td>
+      <td>56.0</td>
+      <td>50.0</td>
+      <td>25.5</td>
+      <td>24.3</td>
+      <td>0.0</td>
+      <td>4.9</td>
+      <td>888.4</td>
+      <td>888.1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15:00</td>
+      <td>0.848048</td>
+      <td>2.5</td>
+      <td>52.0</td>
+      <td>44.0</td>
+      <td>27.4</td>
+      <td>25.0</td>
+      <td>0.0</td>
+      <td>5.8</td>
+      <td>888.1</td>
+      <td>887.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>16:00</td>
+      <td>0.224951</td>
+      <td>2.4</td>
+      <td>50.0</td>
+      <td>43.0</td>
+      <td>27.1</td>
+      <td>25.5</td>
+      <td>0.0</td>
+      <td>5.8</td>
+      <td>887.4</td>
+      <td>886.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wind</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;hora&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para poder dar solución a lo propuesto en el enunciado de este parcial, se debe hacer de manera manual la validación cruzada y la hiperparametización de cada uno de los modelos, a continuacion se definirán las funciones que nos ayudaran a lograr desplegar los modelos.</p>
+<p><strong>Conjuntos de entrenamiento y test</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_wind</span><span class="o">=</span><span class="n">wind</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;vel_viento&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Y</span><span class="o">=</span><span class="n">wind</span><span class="p">[[</span><span class="s1">&#39;vel_viento&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Funcion que se encarga de separar los pliegues en la validación cruzada</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">entrenamiento_test</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="n">x_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">start</span> <span class="p">:</span> <span class="n">start</span> <span class="o">+</span> <span class="n">T</span> <span class="o">*</span> <span class="mi">24</span><span class="p">]</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">start</span> <span class="p">:</span> <span class="n">start</span> <span class="o">+</span> <span class="n">T</span> <span class="o">*</span> <span class="mi">24</span><span class="p">]</span>
+    
+    <span class="n">x_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="n">T</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> <span class="n">h</span> <span class="p">:</span> <span class="n">start</span> <span class="o">+</span> <span class="n">T</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> <span class="n">h</span> <span class="o">+</span> <span class="mi">24</span><span class="p">]</span>
+    <span class="n">y_test</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="n">T</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> <span class="n">h</span> <span class="p">:</span> <span class="n">start</span> <span class="o">+</span> <span class="n">T</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> <span class="n">h</span> <span class="o">+</span> <span class="mi">24</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Definicion de el dataframe con los resultados de los 24 modelos</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dataframe_resultados</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">mejor_ventana</span><span class="p">,</span> <span class="n">modelos</span><span class="p">):</span>
+    <span class="n">nuevo_modelo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;Hora&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">h</span><span class="p">],</span>
+        <span class="s1">&#39;Ventana&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+        <span class="s1">&#39;Mejor_parametro&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+        <span class="s1">&#39;R2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">3</span><span class="p">]],</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">4</span><span class="p">]],</span>
+        <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">5</span><span class="p">]]</span>
+    <span class="p">})</span>
+    
+    <span class="n">modelos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">modelos</span><span class="p">,</span> <span class="n">nuevo_modelo</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">modelos</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Con esto definido podemos pasar a implementar cada uno de los modelos.</p>
+<section id="k-nn">
+<h2><strong>K-NN</strong><a class="headerlink" href="#k-nn" title="Link to this heading">#</a></h2>
+<p>Como sabemos, debemos implentar 24 modelos, donde cada uno de ellos, busca predecir cada uno de los siguientes días, veamos como se comporta el modelo k-nn para cada una de las predicciones.</p>
+<p><strong>Funcion que se encarga de hiperparametrizar el modelo en cada uno de los pliegues de la validación.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">obtener_mejor_parametro_k</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">parametros</span><span class="p">):</span>
+    <span class="n">mejor_r2</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">mejor_k</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">mejor_mse</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">mejor_mae</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">mejor_mape</span> <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">parametros</span><span class="p">:</span>
+        <span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+        <span class="n">score_r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        
+        <span class="c1"># Calcular las métricas adicionales</span>
+        <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+        
+        <span class="c1"># Actualizar el mejor k si este R² es mayor</span>
+        <span class="k">if</span> <span class="n">score_r2</span> <span class="o">&gt;</span> <span class="n">mejor_r2</span><span class="p">:</span>
+            <span class="n">mejor_r2</span> <span class="o">=</span> <span class="n">score_r2</span>
+            <span class="n">mejor_k</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">mejor_mse</span> <span class="o">=</span> <span class="n">mse</span>
+            <span class="n">mejor_mae</span> <span class="o">=</span> <span class="n">mae</span>
+            <span class="n">mejor_rmse</span> <span class="o">=</span> <span class="n">rmse</span>
+    
+    <span class="k">return</span> <span class="n">mejor_k</span><span class="p">,</span> <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_rmse</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Ciclo principal, se despliegan los 24 modelos, cada uno con su validación cruzada e hiperparametrización.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">modelos_knn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">,</span> <span class="s1">&#39;Ventana&#39;</span><span class="p">,</span> <span class="s1">&#39;Mejor_parametro&#39;</span><span class="p">,</span> <span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span><span class="s1">&#39;MAE&#39;</span><span class="p">,</span><span class="s1">&#39;RMSE&#39;</span><span class="p">])</span>
+<span class="n">ventanas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+<span class="n">vecinos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
+    <span class="n">mejores_k_por_ventana</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">ventanas</span><span class="p">:</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">T</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_wind</span><span class="p">):</span>
+            <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">entrenamiento_test</span><span class="p">(</span><span class="n">X_wind</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+            
+            <span class="n">x_train_norm</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+            <span class="n">x_test_norm</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+            <span class="n">mejor_k</span><span class="p">,</span> <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_mape</span> <span class="o">=</span> <span class="n">obtener_mejor_parametro_k</span><span class="p">(</span><span class="n">x_train_norm</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test_norm</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">vecinos</span><span class="p">)</span>
+            
+            <span class="n">mejores_k_por_ventana</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">mejor_k</span><span class="p">,</span> <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_mape</span><span class="p">))</span>
+
+            <span class="n">start</span> <span class="o">+=</span> <span class="n">T</span> <span class="o">*</span> <span class="mi">24</span>
+    
+    
+    <span class="n">mejor_ventana</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">mejores_k_por_ventana</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    
+    <span class="n">modelos_knn</span> <span class="o">=</span> <span class="n">dataframe_resultados</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">mejor_ventana</span><span class="p">,</span> <span class="n">modelos_knn</span><span class="p">)</span>
+<span class="n">modelos_knn</span><span class="o">=</span><span class="n">modelos_knn</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Mejor_parametro&#39;</span><span class="p">:</span> <span class="s1">&#39;Mejor k&#39;</span><span class="p">})</span>
+<span class="n">modelos_knn</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;modelos_knn.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="resultados">
+<h3><strong>Resultados</strong><a class="headerlink" href="#resultados" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelos_knn</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hora</th>
+      <th>Ventana</th>
+      <th>Mejor k</th>
+      <th>R2</th>
+      <th>MSE</th>
+      <th>MAE</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>14</td>
+      <td>10</td>
+      <td>0.888929</td>
+      <td>0.158854</td>
+      <td>0.330417</td>
+      <td>0.398565</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>14</td>
+      <td>10</td>
+      <td>0.885492</td>
+      <td>0.156492</td>
+      <td>0.326667</td>
+      <td>0.395590</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>21</td>
+      <td>5</td>
+      <td>0.880477</td>
+      <td>0.140033</td>
+      <td>0.291667</td>
+      <td>0.374210</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>14</td>
+      <td>10</td>
+      <td>0.879754</td>
+      <td>0.175908</td>
+      <td>0.348333</td>
+      <td>0.419414</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>28</td>
+      <td>15</td>
+      <td>0.883015</td>
+      <td>0.124733</td>
+      <td>0.288333</td>
+      <td>0.353176</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>7</td>
+      <td>5</td>
+      <td>0.892518</td>
+      <td>0.224450</td>
+      <td>0.384167</td>
+      <td>0.473762</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>21</td>
+      <td>10</td>
+      <td>0.892036</td>
+      <td>0.133058</td>
+      <td>0.254167</td>
+      <td>0.364772</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>7</td>
+      <td>5</td>
+      <td>0.885964</td>
+      <td>0.212383</td>
+      <td>0.372500</td>
+      <td>0.460851</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>21</td>
+      <td>30</td>
+      <td>0.882219</td>
+      <td>0.135626</td>
+      <td>0.253750</td>
+      <td>0.368275</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>14</td>
+      <td>10</td>
+      <td>0.883813</td>
+      <td>0.196096</td>
+      <td>0.322917</td>
+      <td>0.442827</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>14</td>
+      <td>15</td>
+      <td>0.891014</td>
+      <td>0.197974</td>
+      <td>0.315556</td>
+      <td>0.444943</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>14</td>
+      <td>15</td>
+      <td>0.893514</td>
+      <td>0.198833</td>
+      <td>0.316667</td>
+      <td>0.445907</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>7</td>
+      <td>5</td>
+      <td>0.901265</td>
+      <td>0.117550</td>
+      <td>0.264167</td>
+      <td>0.342856</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>7</td>
+      <td>10</td>
+      <td>0.897445</td>
+      <td>0.121825</td>
+      <td>0.258333</td>
+      <td>0.349034</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>7</td>
+      <td>5</td>
+      <td>0.873795</td>
+      <td>0.227617</td>
+      <td>0.412500</td>
+      <td>0.477092</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>14</td>
+      <td>20</td>
+      <td>0.895113</td>
+      <td>0.118870</td>
+      <td>0.271458</td>
+      <td>0.344775</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>7</td>
+      <td>20</td>
+      <td>0.920418</td>
+      <td>0.135439</td>
+      <td>0.287708</td>
+      <td>0.368020</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>7</td>
+      <td>20</td>
+      <td>0.922026</td>
+      <td>0.132702</td>
+      <td>0.280000</td>
+      <td>0.364283</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>7</td>
+      <td>20</td>
+      <td>0.924322</td>
+      <td>0.129502</td>
+      <td>0.273333</td>
+      <td>0.359864</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>7</td>
+      <td>15</td>
+      <td>0.891015</td>
+      <td>0.180067</td>
+      <td>0.321111</td>
+      <td>0.424343</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21</td>
+      <td>28</td>
+      <td>15</td>
+      <td>0.888418</td>
+      <td>0.225457</td>
+      <td>0.331389</td>
+      <td>0.474824</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22</td>
+      <td>28</td>
+      <td>15</td>
+      <td>0.892044</td>
+      <td>0.225717</td>
+      <td>0.334167</td>
+      <td>0.475096</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23</td>
+      <td>28</td>
+      <td>15</td>
+      <td>0.892940</td>
+      <td>0.230596</td>
+      <td>0.342778</td>
+      <td>0.480204</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>28</td>
+      <td>15</td>
+      <td>0.895572</td>
+      <td>0.229913</td>
+      <td>0.340278</td>
+      <td>0.479492</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>En la tabla enterior vemos un dataframe, donde cada fila indica los scores obtenidos para cada uno de lo 24 modelos, así como cual fue la ventana de predicción que arrojo este score que es el mejor dentro de las demas ventanas y por supuesto su parametro k respectivo, ademas, podemos evaluar como se comporta cada modelo basado en sus errores.</p>
+<p>Por ejemplo si suponemos que nos intereza evaluar el modelo que predice el día número 10 vemos que la mejor ventana es la de 14 días con un parametro <span class="math notranslate nohighlight">\(k=10\)</span>, esta combinación de parametros tiene una explicación de la variabilidad de los datos (<span class="math notranslate nohighlight">\(R^2\)</span>) del 89% y además vemos que los errores (MAE, MSE, MAPE) son bastante pequeños que es lo ideal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;7&#39;</span><span class="p">,</span><span class="s1">&#39;14&#39;</span><span class="p">,</span><span class="s1">&#39;28&#39;</span><span class="p">,</span><span class="s1">&#39;21&#39;</span><span class="p">]</span>
+<span class="n">ventanas</span><span class="o">=</span><span class="n">modelos_knn</span><span class="p">[</span><span class="s1">&#39;Ventana&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">ventanas</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Conteo de mejores modelos K-NN&#39;</span><span class="p">,</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Ventanas de predicción&#39;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>   
+    <span class="n">height</span><span class="o">=</span><span class="mi">500</span>   
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Podemos ayudarnos de la gráfica anterior para darnos una idea de cual es la ventana que mas se usó para predecir cada uno de los días, en este caso es la ventana de 7 días con una frecuencia de 9, revisemos ahora de una manera similar, cuales fueron los mejores parametros que se escogieron.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15&#39;</span><span class="p">,</span><span class="s1">&#39;10&#39;</span><span class="p">,</span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="s1">&#39;20&#39;</span><span class="p">,</span><span class="mi">30</span><span class="p">]</span>
+<span class="n">ventanas</span><span class="o">=</span><span class="n">modelos_knn</span><span class="p">[</span><span class="s1">&#39;Mejor k&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">ventanas</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Conteo de mejores modelos K-NN&#39;</span><span class="p">,</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Ventanas de predicción&#39;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>   
+    <span class="n">height</span><span class="o">=</span><span class="mi">500</span>   
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Con la gráfica anterior podemos identificar la frecuencia con la que fueron elegidos los parametros para cada uno de los 24 modelos, vemos que el mas frecuente es el parametro <span class="math notranslate nohighlight">\(k=15\)</span>.</p>
+<p>Podemos ahora análisar los promedios de cada una de las métricas de error en cada una de las ventanas de predicción, vara así hacer una conclusión general.</p>
+<section id="promedio-por-ventana">
+<h4><em><strong>Promedio por ventana</strong></em><a class="headerlink" href="#promedio-por-ventana" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columnas_metricas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="s1">&#39;MAE&#39;</span><span class="p">,</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span>
+<span class="n">prom_knn</span> <span class="o">=</span> <span class="n">modelos_knn</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Ventana&#39;</span><span class="p">)[</span><span class="n">columnas_metricas</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">prom_knn</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ventana</th>
+      <th>R2</th>
+      <th>MSE</th>
+      <th>MAE</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7</td>
+      <td>0.900974</td>
+      <td>0.164615</td>
+      <td>0.317091</td>
+      <td>0.402234</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>14</td>
+      <td>0.888233</td>
+      <td>0.171861</td>
+      <td>0.318859</td>
+      <td>0.413146</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21</td>
+      <td>0.884910</td>
+      <td>0.136239</td>
+      <td>0.266528</td>
+      <td>0.369086</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>28</td>
+      <td>0.890398</td>
+      <td>0.207283</td>
+      <td>0.327389</td>
+      <td>0.452559</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Como dijimos anteriormente, mediante la tabla podemos ver le promedio de las métricas para cada una de las ventanas, vemos que el <span class="math notranslate nohighlight">\(r^2\)</span> promedio mas grande esta en la ventana de 7 días con un ajuste de 90%, las demas ventanas tienen un ajuste promedio de 88%, lo cual indica que el modelo k-nn se ajusta bien a la variabilidad de los datos, ademas los errores son bajos en cada una de las ventanas, lo cual es lo esperado.</p>
+</section>
+</section>
+</section>
+<section id="ridge">
+<h2><strong>Ridge</strong><a class="headerlink" href="#ridge" title="Link to this heading">#</a></h2>
+<p>En esta sección se implementará la misma lógica del modelo anterior, veamos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">obtener_mejor_alpha_rige</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">parametros</span><span class="p">):</span>
+    <span class="n">mejor_r2</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">mejor_alpha</span><span class="o">=</span> <span class="kc">None</span>
+    <span class="n">mejor_mse</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">mejor_mae</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">mejor_mape</span> <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">parametros</span><span class="p">:</span>
+        <span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="n">ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+        <span class="n">score_r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        
+        <span class="c1"># Calcular las métricas adicionales</span>
+        <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+        
+        <span class="c1"># Actualizar el mejor k si este R² es mayor</span>
+        <span class="k">if</span> <span class="n">score_r2</span> <span class="o">&gt;</span> <span class="n">mejor_r2</span><span class="p">:</span>
+            <span class="n">mejor_r2</span> <span class="o">=</span> <span class="n">score_r2</span>
+            <span class="n">mejor_alpha</span> <span class="o">=</span> <span class="n">alpha</span>
+            <span class="n">mejor_mse</span> <span class="o">=</span> <span class="n">mse</span>
+            <span class="n">mejor_mae</span> <span class="o">=</span> <span class="n">mae</span>
+            <span class="n">mejor_rmse</span> <span class="o">=</span> <span class="n">rmse</span>
+    
+    <span class="k">return</span> <span class="n">mejor_alpha</span><span class="p">,</span> <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_rmse</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>En este ciclio principal buscaremos los mejores parametros del modelo rige para cada uno de los modelos para cada día, obteniendo como resultado los mejores parámetros y las métricas en cada modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">modelos_ridge</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">,</span> <span class="s1">&#39;Ventana&#39;</span><span class="p">,</span> <span class="s1">&#39;Mejor_parametro&#39;</span><span class="p">,</span> <span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span><span class="s1">&#39;MAE&#39;</span><span class="p">,</span><span class="s1">&#39;RMSE&#39;</span><span class="p">])</span>
+<span class="n">ventanas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]</span> 
+
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
+    <span class="n">mejores_alpha_por_ventana</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">ventanas</span><span class="p">:</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">T</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_wind</span><span class="p">):</span>
+            <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">entrenamiento_test</span><span class="p">(</span><span class="n">X_wind</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+            
+            <span class="n">x_train_norm</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+            <span class="n">x_test_norm</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+            <span class="n">mejor_alpha</span><span class="p">,</span> <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_rmse</span> <span class="o">=</span> <span class="n">obtener_mejor_alpha_rige</span><span class="p">(</span><span class="n">x_train_norm</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test_norm</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+            
+            <span class="n">mejores_alpha_por_ventana</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">mejor_alpha</span><span class="p">,</span> <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_rmse</span><span class="p">))</span>
+
+            <span class="n">start</span> <span class="o">+=</span> <span class="n">T</span> <span class="o">*</span> <span class="mi">24</span>
+    
+    
+    <span class="n">mejor_ventana</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">mejores_alpha_por_ventana</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    
+    <span class="n">modelos_ridge</span> <span class="o">=</span> <span class="n">dataframe_resultados</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">mejor_ventana</span><span class="p">,</span> <span class="n">modelos_ridge</span><span class="p">)</span>
+
+<span class="c1"># Mostrar el DataFrame final con los mejores modelos</span>
+<span class="n">modelos_ridge</span><span class="o">=</span><span class="n">modelos_ridge</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Mejor_parametro&#39;</span><span class="p">:</span> <span class="s1">&#39;Mejor Alpha&#39;</span><span class="p">})</span>
+<span class="n">modelos_ridge</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;modelos_ridge.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\fonta\AppData\Local\Temp\ipykernel_41148\3951791870.py:12: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  modelos = pd.concat([modelos, nuevo_modelo], ignore_index=True)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h3><strong>Resultados</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelos_ridge</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hora</th>
+      <th>Ventana</th>
+      <th>Mejor Alpha</th>
+      <th>R2</th>
+      <th>MSE</th>
+      <th>MAE</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>21</td>
+      <td>0.001</td>
+      <td>0.934592</td>
+      <td>0.329656</td>
+      <td>0.427673</td>
+      <td>0.574157</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>21</td>
+      <td>0.100</td>
+      <td>0.929795</td>
+      <td>0.330341</td>
+      <td>0.431771</td>
+      <td>0.574753</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>21</td>
+      <td>1.000</td>
+      <td>0.944250</td>
+      <td>0.065317</td>
+      <td>0.201524</td>
+      <td>0.255571</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>21</td>
+      <td>1.000</td>
+      <td>0.941317</td>
+      <td>0.065692</td>
+      <td>0.203539</td>
+      <td>0.256304</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>21</td>
+      <td>1.000</td>
+      <td>0.939059</td>
+      <td>0.066881</td>
+      <td>0.207506</td>
+      <td>0.258615</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>21</td>
+      <td>1.000</td>
+      <td>0.937825</td>
+      <td>0.064859</td>
+      <td>0.198789</td>
+      <td>0.254675</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>21</td>
+      <td>1.000</td>
+      <td>0.939630</td>
+      <td>0.074402</td>
+      <td>0.215061</td>
+      <td>0.272767</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>7</td>
+      <td>0.001</td>
+      <td>0.935651</td>
+      <td>0.150246</td>
+      <td>0.328315</td>
+      <td>0.387616</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>7</td>
+      <td>1.000</td>
+      <td>0.937373</td>
+      <td>0.083394</td>
+      <td>0.226741</td>
+      <td>0.288780</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>7</td>
+      <td>1.000</td>
+      <td>0.937972</td>
+      <td>0.085158</td>
+      <td>0.233906</td>
+      <td>0.291818</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>7</td>
+      <td>1.000</td>
+      <td>0.935406</td>
+      <td>0.086337</td>
+      <td>0.237453</td>
+      <td>0.293831</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>14</td>
+      <td>0.100</td>
+      <td>0.927728</td>
+      <td>0.131837</td>
+      <td>0.276529</td>
+      <td>0.363093</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>14</td>
+      <td>0.100</td>
+      <td>0.927105</td>
+      <td>0.132973</td>
+      <td>0.279746</td>
+      <td>0.364655</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>7</td>
+      <td>1.000</td>
+      <td>0.928734</td>
+      <td>0.092961</td>
+      <td>0.252752</td>
+      <td>0.304896</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>7</td>
+      <td>0.010</td>
+      <td>0.937051</td>
+      <td>0.124219</td>
+      <td>0.298075</td>
+      <td>0.352447</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>7</td>
+      <td>0.010</td>
+      <td>0.937569</td>
+      <td>0.129898</td>
+      <td>0.308033</td>
+      <td>0.360414</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>7</td>
+      <td>0.010</td>
+      <td>0.936241</td>
+      <td>0.129922</td>
+      <td>0.308944</td>
+      <td>0.360446</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>7</td>
+      <td>1.000</td>
+      <td>0.933824</td>
+      <td>0.106129</td>
+      <td>0.272488</td>
+      <td>0.325775</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>7</td>
+      <td>1.000</td>
+      <td>0.932105</td>
+      <td>0.110948</td>
+      <td>0.280383</td>
+      <td>0.333088</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>7</td>
+      <td>1.000</td>
+      <td>0.936070</td>
+      <td>0.108174</td>
+      <td>0.274880</td>
+      <td>0.328899</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21</td>
+      <td>7</td>
+      <td>0.001</td>
+      <td>0.934148</td>
+      <td>0.102939</td>
+      <td>0.288184</td>
+      <td>0.320840</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22</td>
+      <td>7</td>
+      <td>0.001</td>
+      <td>0.941355</td>
+      <td>0.095632</td>
+      <td>0.271137</td>
+      <td>0.309244</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23</td>
+      <td>7</td>
+      <td>0.001</td>
+      <td>0.942113</td>
+      <td>0.095801</td>
+      <td>0.271570</td>
+      <td>0.309518</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>7</td>
+      <td>0.001</td>
+      <td>0.945009</td>
+      <td>0.090471</td>
+      <td>0.261064</td>
+      <td>0.300785</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Vemos que obtenemos una tabla parecida a la que conseguimos en el modelo anterior, si damos una revision un poco rápida, podemos ver que en general estos modelo Ridge, tienen un mejor ajuste en comparación con el modelo anterior, ademas los errores son mas pequeños.</p>
+<p>Veamos ahora el conteo de las ventanas de predicción a ver cual es la mas usada para predecir.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;7&#39;</span><span class="p">,</span><span class="s1">&#39;21&#39;</span><span class="p">,</span><span class="s1">&#39;14&#39;</span><span class="p">]</span>
+<span class="n">ventanas</span><span class="o">=</span><span class="n">modelos_ridge</span><span class="p">[</span><span class="s1">&#39;Ventana&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">ventanas</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Conteo de mejores modelos Ridge&#39;</span><span class="p">,</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Ventanas de predicción&#39;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>   
+    <span class="n">height</span><span class="o">=</span><span class="mi">500</span>   
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Vemos que la ventana que mas fue escogida por nuestro programa es la ventana de 7 días, ademas vemos que no se tiene presencia de la ventana de 28 días.</p>
+<p>Veamos que parametros fueron los mas usados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1.000&#39;</span><span class="p">,</span><span class="s1">&#39;0.001&#39;</span><span class="p">,</span><span class="s1">&#39;0.100&#39;</span><span class="p">,</span><span class="s1">&#39;0.010&#39;</span> <span class="p">]</span>
+<span class="n">alphass</span><span class="o">=</span><span class="n">modelos_ridge</span><span class="p">[</span><span class="s1">&#39;Mejor Alpha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">alphass</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Conteo de mejores parametros (Alpha) Ridge&#39;</span><span class="p">,</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Pametros&#39;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>   
+    <span class="n">height</span><span class="o">=</span><span class="mi">500</span>   
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Con la figura anterior, vemos de anera gráfica cuales fueron los parametros mas escogidos para nuestras predicciones de interés, vemos que el mas usado es <span class="math notranslate nohighlight">\(\alpha=1\)</span>.</p>
+<section id="promedio-por-ventanas">
+<h4><em><strong>Promedio por ventanas</strong></em><a class="headerlink" href="#promedio-por-ventanas" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columnas_metricas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="s1">&#39;MAE&#39;</span><span class="p">,</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span>
+<span class="n">prom_ridge</span> <span class="o">=</span> <span class="n">modelos_ridge</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Ventana&#39;</span><span class="p">)[</span><span class="n">columnas_metricas</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">prom_ridge</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ventana</th>
+      <th>R2</th>
+      <th>MSE</th>
+      <th>MAE</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7</td>
+      <td>0.936708</td>
+      <td>0.106149</td>
+      <td>0.274262</td>
+      <td>0.324560</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>14</td>
+      <td>0.927416</td>
+      <td>0.132405</td>
+      <td>0.278138</td>
+      <td>0.363874</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21</td>
+      <td>0.938067</td>
+      <td>0.142450</td>
+      <td>0.269409</td>
+      <td>0.349549</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Esta ultima tabla nos ayuda a conluir de mejor forma como se esta comportando el modelo Ridge para nuestras predicciones de interés, vemos que el promedio del ajuste de la variabilidad de los datos es bastante bueno en cada una de las ventanas, vemos que el error absoluto medio es bastante pequeño, lo que quiere decir que las predicciones no estan tan alejadas de los datos reales, así que podemos decir que en general, el modelo ridge ajusta muy bien en cada una de las ventanas, siendo el mejor horizonte la ventana de 21 con un <span class="math notranslate nohighlight">\(r^2=93.8\)</span> %</p>
+</section>
+</section>
+</section>
+<section id="lasso">
+<h2><strong>Lasso</strong><a class="headerlink" href="#lasso" title="Link to this heading">#</a></h2>
+<p>Pasemos a desplegar y evaluar el modelo Lasso, para nuestras predicciones de interés:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">obtener_mejor_alpha_lasso</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">parametros</span><span class="p">):</span>
+    <span class="n">mejor_r2</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">mejor_alpha</span><span class="o">=</span> <span class="kc">None</span>
+    <span class="n">mejor_mse</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">mejor_mae</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">mejor_mape</span> <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">parametros</span><span class="p">:</span>
+        <span class="n">lasso</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="n">lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+        <span class="n">score_r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        
+        <span class="c1"># Calcular las métricas adicionales</span>
+        <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+        
+        <span class="c1"># Actualizar el mejor k si este R² es mayor</span>
+        <span class="k">if</span> <span class="n">score_r2</span> <span class="o">&gt;</span> <span class="n">mejor_r2</span><span class="p">:</span>
+            <span class="n">mejor_r2</span> <span class="o">=</span> <span class="n">score_r2</span>
+            <span class="n">mejor_alpha</span> <span class="o">=</span> <span class="n">alpha</span>
+            <span class="n">mejor_mse</span> <span class="o">=</span> <span class="n">mse</span>
+            <span class="n">mejor_mae</span> <span class="o">=</span> <span class="n">mae</span>
+            <span class="n">mejor_rmse</span> <span class="o">=</span> <span class="n">rmse</span>
+    
+    <span class="k">return</span> <span class="n">mejor_alpha</span><span class="p">,</span> <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_rmse</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">modelos_lasso</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">,</span> <span class="s1">&#39;Ventana&#39;</span><span class="p">,</span> <span class="s1">&#39;Mejor_parametro&#39;</span><span class="p">,</span> <span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span><span class="s1">&#39;MAE&#39;</span><span class="p">,</span><span class="s1">&#39;RMSE&#39;</span><span class="p">])</span>
+<span class="n">ventanas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]</span> 
+
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
+    <span class="n">mejores_alpha_por_ventana</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">ventanas</span><span class="p">:</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">T</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_wind</span><span class="p">):</span>
+            <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">entrenamiento_test</span><span class="p">(</span><span class="n">X_wind</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+            
+            <span class="n">x_train_norm</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+            <span class="n">x_test_norm</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+            <span class="n">mejor_alpha</span><span class="p">,</span> <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_rmse</span> <span class="o">=</span> <span class="n">obtener_mejor_alpha_lasso</span><span class="p">(</span><span class="n">x_train_norm</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test_norm</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+            
+            <span class="n">mejores_alpha_por_ventana</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">mejor_alpha</span><span class="p">,</span> <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_rmse</span><span class="p">))</span>
+
+            <span class="n">start</span> <span class="o">+=</span> <span class="n">T</span> <span class="o">*</span> <span class="mi">24</span>
+    
+    
+    <span class="n">mejor_ventana</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">mejores_alpha_por_ventana</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    
+    <span class="n">modelos_lasso</span> <span class="o">=</span> <span class="n">dataframe_resultados</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">mejor_ventana</span><span class="p">,</span> <span class="n">modelos_lasso</span><span class="p">)</span>
+
+<span class="c1"># Mostrar el DataFrame final con los mejores modelos</span>
+<span class="n">modelos_lasso</span><span class="o">=</span><span class="n">modelos_lasso</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Mejor_parametro&#39;</span><span class="p">:</span> <span class="s1">&#39;Mejor Alpha&#39;</span><span class="p">})</span>
+<span class="n">modelos_lasso</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;modelos_lasso.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\fonta\AppData\Local\Temp\ipykernel_41148\3951791870.py:12: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id2">
+<h3><strong>Resultados</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelos_lasso</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hora</th>
+      <th>Ventana</th>
+      <th>Mejor Alpha</th>
+      <th>R2</th>
+      <th>MSE</th>
+      <th>MAE</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>21</td>
+      <td>0.001</td>
+      <td>0.934778</td>
+      <td>0.328715</td>
+      <td>0.430094</td>
+      <td>0.573337</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>21</td>
+      <td>0.001</td>
+      <td>0.930312</td>
+      <td>0.327912</td>
+      <td>0.429346</td>
+      <td>0.572636</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>21</td>
+      <td>0.010</td>
+      <td>0.937317</td>
+      <td>0.073439</td>
+      <td>0.222907</td>
+      <td>0.270996</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>21</td>
+      <td>0.010</td>
+      <td>0.934820</td>
+      <td>0.072964</td>
+      <td>0.220274</td>
+      <td>0.270118</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>21</td>
+      <td>0.010</td>
+      <td>0.932197</td>
+      <td>0.074412</td>
+      <td>0.223914</td>
+      <td>0.272786</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>7</td>
+      <td>0.001</td>
+      <td>0.933201</td>
+      <td>0.162489</td>
+      <td>0.339456</td>
+      <td>0.403100</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>14</td>
+      <td>0.001</td>
+      <td>0.933864</td>
+      <td>0.091116</td>
+      <td>0.227098</td>
+      <td>0.301854</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>14</td>
+      <td>0.001</td>
+      <td>0.932338</td>
+      <td>0.126903</td>
+      <td>0.267321</td>
+      <td>0.356235</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>14</td>
+      <td>0.001</td>
+      <td>0.931881</td>
+      <td>0.126356</td>
+      <td>0.265645</td>
+      <td>0.355467</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>14</td>
+      <td>0.001</td>
+      <td>0.932090</td>
+      <td>0.093233</td>
+      <td>0.238569</td>
+      <td>0.305341</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>14</td>
+      <td>0.001</td>
+      <td>0.930966</td>
+      <td>0.125756</td>
+      <td>0.277960</td>
+      <td>0.354621</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>14</td>
+      <td>0.001</td>
+      <td>0.932136</td>
+      <td>0.123795</td>
+      <td>0.270630</td>
+      <td>0.351845</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>14</td>
+      <td>0.001</td>
+      <td>0.931451</td>
+      <td>0.125045</td>
+      <td>0.274288</td>
+      <td>0.353617</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>7</td>
+      <td>0.010</td>
+      <td>0.930240</td>
+      <td>0.162135</td>
+      <td>0.317722</td>
+      <td>0.402660</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>7</td>
+      <td>0.001</td>
+      <td>0.937213</td>
+      <td>0.123899</td>
+      <td>0.297210</td>
+      <td>0.351993</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>7</td>
+      <td>0.001</td>
+      <td>0.937688</td>
+      <td>0.129651</td>
+      <td>0.308604</td>
+      <td>0.360071</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>7</td>
+      <td>0.001</td>
+      <td>0.936781</td>
+      <td>0.128821</td>
+      <td>0.303289</td>
+      <td>0.358917</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>14</td>
+      <td>0.001</td>
+      <td>0.933028</td>
+      <td>0.107405</td>
+      <td>0.264771</td>
+      <td>0.327727</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>14</td>
+      <td>0.001</td>
+      <td>0.930746</td>
+      <td>0.127310</td>
+      <td>0.273909</td>
+      <td>0.356805</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>14</td>
+      <td>0.001</td>
+      <td>0.932860</td>
+      <td>0.113606</td>
+      <td>0.276365</td>
+      <td>0.337054</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21</td>
+      <td>7</td>
+      <td>0.010</td>
+      <td>0.929505</td>
+      <td>0.137161</td>
+      <td>0.317156</td>
+      <td>0.370353</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22</td>
+      <td>7</td>
+      <td>0.010</td>
+      <td>0.936236</td>
+      <td>0.126089</td>
+      <td>0.304359</td>
+      <td>0.355090</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23</td>
+      <td>7</td>
+      <td>0.010</td>
+      <td>0.938044</td>
+      <td>0.125348</td>
+      <td>0.301349</td>
+      <td>0.354046</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>7</td>
+      <td>0.001</td>
+      <td>0.938630</td>
+      <td>0.100966</td>
+      <td>0.270371</td>
+      <td>0.317751</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>En la tabla anterior se muestran los resultados del modelo lasso para cada una de los días de interés, vemos de manera muy general que los resultados de este modelo no son muy distintos a los del modelo anterior, la mayor diferencia entre Ridge y Lasso es que en cuestiones de tiempo ocupado para hacer las predicciones lasso tardó un total de 7 minutos, a diferencia del modelo Ridge y K-NN que tardaron 15 y 24 minutos respectivamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;14&#39;</span><span class="p">,</span><span class="s1">&#39;7&#39;</span><span class="p">,</span><span class="s1">&#39;21&#39;</span><span class="p">]</span>
+<span class="n">ventanas</span><span class="o">=</span><span class="n">modelos_lasso</span><span class="p">[</span><span class="s1">&#39;Ventana&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">ventanas</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Conteo de mejores modelos Lasso&#39;</span><span class="p">,</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Ventanas de predicción&#39;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>   
+    <span class="n">height</span><span class="o">=</span><span class="mi">500</span>   
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Con la gráfica anterior ilustramos que el modelo que fue mas escogido por nuestro programa es la ventana de 14 días y vemos que nuevamente la ventana de 28 días no fue elegida para ninguno de los 24 modelos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;0.001&#39;</span><span class="p">,</span><span class="s1">&#39;0.010&#39;</span> <span class="p">]</span>
+<span class="n">alphass</span><span class="o">=</span><span class="n">modelos_lasso</span><span class="p">[</span><span class="s1">&#39;Mejor Alpha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">alphass</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Conteo de mejores parametros (Alpha) Ridge&#39;</span><span class="p">,</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Pametros&#39;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>   
+    <span class="n">height</span><span class="o">=</span><span class="mi">500</span>   
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Para el caso de este modelo solo fueron escogido dos de los 5 parametros propuestos para la hiperparametrización, siendo el mas escogido el <span class="math notranslate nohighlight">\(\alpha=0.001\)</span> con una frecuencia de 17.</p>
+<p>Pasemos a analisar como lo hemos venido haciendo, los premedios de las ventanas que fueron tomadas para el modelo Lasso.</p>
+<section id="id3">
+<h4><em><strong>Promedio por ventana</strong></em><a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columnas_metricas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="s1">&#39;MAE&#39;</span><span class="p">,</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span>
+<span class="n">prom_lasso</span> <span class="o">=</span> <span class="n">modelos_lasso</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Ventana&#39;</span><span class="p">)[</span><span class="n">columnas_metricas</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">prom_lasso</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ventana</th>
+      <th>R2</th>
+      <th>MSE</th>
+      <th>MAE</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7</td>
+      <td>0.935282</td>
+      <td>0.132951</td>
+      <td>0.306613</td>
+      <td>0.363776</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>14</td>
+      <td>0.932136</td>
+      <td>0.116052</td>
+      <td>0.263656</td>
+      <td>0.340057</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21</td>
+      <td>0.933885</td>
+      <td>0.175488</td>
+      <td>0.305307</td>
+      <td>0.391975</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Con la tabla anterior podemos concluir que el promedio de cada una de las ventanas de prediccioón no paerecen tener diferencias significativas, al igual que los errores. Así que en general podemos decir que el modelo lasso ajusta muy bien tambien a nuestros datos, además el mejor <span class="math notranslate nohighlight">\(r^2\)</span> promedio esta en la ventana de 7 días y es de 93.52% que si recordamos el mejor <span class="math notranslate nohighlight">\(R^2\)</span> promedio de Ridge este fue de 93.8% así que Ridge sigue siendo hasta ahora el mejor modelo en terminos del promedio.</p>
+</section>
+</section>
+</section>
+<section id="regresion-lineal">
+<h2><strong>Regresión lineal</strong><a class="headerlink" href="#regresion-lineal" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dataframe_resultados_rl</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">mejor_ventana</span><span class="p">,</span> <span class="n">modelos</span><span class="p">):</span>
+    <span class="n">nuevo_modelo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;Hora&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">h</span><span class="p">],</span>
+        <span class="s1">&#39;Ventana&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+        <span class="s1">&#39;R2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">3</span><span class="p">]],</span>
+        <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mejor_ventana</span><span class="p">[</span><span class="mi">4</span><span class="p">]]</span>
+    <span class="p">})</span>
+    
+    <span class="n">modelos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">modelos</span><span class="p">,</span> <span class="n">nuevo_modelo</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">modelos</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">obtener_metricas_regresion_lineal</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+    <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+    
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">r2</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">rmse</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">modelos_lineal</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">,</span> <span class="s1">&#39;Ventana&#39;</span><span class="p">,</span> <span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="s1">&#39;MAE&#39;</span><span class="p">,</span> <span class="s1">&#39;RMSE&#39;</span><span class="p">])</span>
+<span class="n">ventanas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
+    <span class="n">mejores_metricas_por_ventana</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">ventanas</span><span class="p">:</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">T</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_wind</span><span class="p">):</span>
+            <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">entrenamiento_test</span><span class="p">(</span><span class="n">X_wind</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+            
+           
+            <span class="n">x_train_norm</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+            <span class="n">x_test_norm</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+            <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_rmse</span> <span class="o">=</span> <span class="n">obtener_metricas_regresion_lineal</span><span class="p">(</span><span class="n">x_train_norm</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test_norm</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+            
+            <span class="n">mejores_metricas_por_ventana</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">mejor_r2</span><span class="p">,</span> <span class="n">mejor_mse</span><span class="p">,</span> <span class="n">mejor_mae</span><span class="p">,</span> <span class="n">mejor_rmse</span><span class="p">))</span>
+
+            <span class="n">start</span> <span class="o">+=</span> <span class="n">T</span> <span class="o">*</span> <span class="mi">24</span>
+    
+    
+    <span class="n">mejor_ventana</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">mejores_metricas_por_ventana</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    
+   
+    <span class="n">modelos_lineal</span> <span class="o">=</span> <span class="n">dataframe_resultados_rl</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">mejor_ventana</span><span class="p">,</span> <span class="n">modelos_lineal</span><span class="p">)</span>
+
+<span class="c1"># Mostrar el DataFrame final con los mejores modelos</span>
+<span class="n">modelos_lineal</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;modelos_lineal.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\fonta\AppData\Local\Temp\ipykernel_41148\638830773.py:11: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id4">
+<h3><strong>Resultados</strong><a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelos_lineal</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hora</th>
+      <th>Ventana</th>
+      <th>R2</th>
+      <th>MSE</th>
+      <th>MAE</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>21</td>
+      <td>0.934592</td>
+      <td>0.329655</td>
+      <td>0.427635</td>
+      <td>0.574156</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>21</td>
+      <td>0.929464</td>
+      <td>0.331898</td>
+      <td>0.429540</td>
+      <td>0.576106</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>21</td>
+      <td>0.929322</td>
+      <td>0.082806</td>
+      <td>0.237134</td>
+      <td>0.287760</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>21</td>
+      <td>0.927122</td>
+      <td>0.081582</td>
+      <td>0.231659</td>
+      <td>0.285625</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>21</td>
+      <td>0.924181</td>
+      <td>0.083210</td>
+      <td>0.235198</td>
+      <td>0.288461</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>7</td>
+      <td>0.936570</td>
+      <td>0.154294</td>
+      <td>0.330820</td>
+      <td>0.392802</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>7</td>
+      <td>0.937148</td>
+      <td>0.154607</td>
+      <td>0.333311</td>
+      <td>0.393201</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>7</td>
+      <td>0.935742</td>
+      <td>0.150032</td>
+      <td>0.328043</td>
+      <td>0.387340</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>14</td>
+      <td>0.930294</td>
+      <td>0.092820</td>
+      <td>0.219539</td>
+      <td>0.304664</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>14</td>
+      <td>0.931310</td>
+      <td>0.094304</td>
+      <td>0.226832</td>
+      <td>0.307089</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>14</td>
+      <td>0.927597</td>
+      <td>0.096774</td>
+      <td>0.232926</td>
+      <td>0.311085</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>14</td>
+      <td>0.926975</td>
+      <td>0.133209</td>
+      <td>0.278642</td>
+      <td>0.364978</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>14</td>
+      <td>0.926429</td>
+      <td>0.134205</td>
+      <td>0.281680</td>
+      <td>0.366341</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>7</td>
+      <td>0.926726</td>
+      <td>0.126270</td>
+      <td>0.301405</td>
+      <td>0.355345</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>7</td>
+      <td>0.936507</td>
+      <td>0.125292</td>
+      <td>0.300147</td>
+      <td>0.353967</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>7</td>
+      <td>0.937058</td>
+      <td>0.130963</td>
+      <td>0.309817</td>
+      <td>0.361888</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>7</td>
+      <td>0.935736</td>
+      <td>0.130952</td>
+      <td>0.309620</td>
+      <td>0.361873</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>7</td>
+      <td>0.932718</td>
+      <td>0.119229</td>
+      <td>0.296434</td>
+      <td>0.345295</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>14</td>
+      <td>0.928171</td>
+      <td>0.117375</td>
+      <td>0.270308</td>
+      <td>0.342601</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>14</td>
+      <td>0.930107</td>
+      <td>0.118264</td>
+      <td>0.273651</td>
+      <td>0.343896</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21</td>
+      <td>7</td>
+      <td>0.934216</td>
+      <td>0.102831</td>
+      <td>0.288112</td>
+      <td>0.320673</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22</td>
+      <td>7</td>
+      <td>0.941401</td>
+      <td>0.095555</td>
+      <td>0.271107</td>
+      <td>0.309120</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23</td>
+      <td>7</td>
+      <td>0.942142</td>
+      <td>0.095753</td>
+      <td>0.271612</td>
+      <td>0.309440</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>7</td>
+      <td>0.945053</td>
+      <td>0.090399</td>
+      <td>0.261067</td>
+      <td>0.300665</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Según vemos en la tabla de resultados, el modelo de regresion lineal ajusta igual de bien que los modelos de Redge y Lasso que a su vez son mejores que el modelo K-NN, verifiquemos esto con los siguientes análisis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;7&#39;</span><span class="p">,</span><span class="s1">&#39;14&#39;</span><span class="p">,</span><span class="s1">&#39;21&#39;</span><span class="p">]</span>
+<span class="n">ventanas</span><span class="o">=</span><span class="n">modelos_ridge</span><span class="p">[</span><span class="s1">&#39;Ventana&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">ventanas</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Conteo de mejores modelos Ridge&#39;</span><span class="p">,</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Ventanas de predicción&#39;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>   
+    <span class="n">height</span><span class="o">=</span><span class="mi">500</span>   
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Vemos que para el modelo lineal, la ventana que mas fue escogida es la ventana de 7 días al igual que en los modelos Ridge y K-NN. Veamos como es el promedio de las métricas por cada ventana de predicción.</p>
+<section id="id5">
+<h4><em><strong>Promedio por ventana</strong></em><a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columnas_metricas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="s1">&#39;MAE&#39;</span><span class="p">,</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span>
+<span class="n">prom_lineal</span> <span class="o">=</span> <span class="n">modelos_lineal</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Ventana&#39;</span><span class="p">)[</span><span class="n">columnas_metricas</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">prom_lineal</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ventana</th>
+      <th>R2</th>
+      <th>MSE</th>
+      <th>MAE</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7</td>
+      <td>0.936751</td>
+      <td>0.123015</td>
+      <td>0.300125</td>
+      <td>0.349301</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>14</td>
+      <td>0.928698</td>
+      <td>0.112422</td>
+      <td>0.254797</td>
+      <td>0.334379</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21</td>
+      <td>0.928936</td>
+      <td>0.181830</td>
+      <td>0.312233</td>
+      <td>0.402422</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Podemos conluir que esta tabla del promedio de métricas para el modelo lineal es muy parecida a las obtenidas en los modelos de Ridge y Lasso. El ajuste del modelo es muy bueno y los errores son pequeños lo cual es ideal al momento de evaluar el funcionamiento del modelo.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="punto2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Punto 2</strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nn"><strong>K-NN</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados"><strong>Resultados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#promedio-por-ventana"><em><strong>Promedio por ventana</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge"><strong>Ridge</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Resultados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#promedio-por-ventanas"><em><strong>Promedio por ventanas</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso"><strong>Lasso</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Resultados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><em><strong>Promedio por ventana</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal"><strong>Regresión lineal</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Resultados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><em><strong>Promedio por ventana</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gwyneth Blanco & Nicoll Fontalvo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
